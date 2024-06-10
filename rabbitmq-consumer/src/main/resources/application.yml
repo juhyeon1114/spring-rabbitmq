@@ -9,6 +9,11 @@ spring:
     username: guest
     password: guest
     virtual-host: /
+    listener:
+      direct:
+        prefetch: 10
+      simple:
+        prefetch: 10
 
 springdoc:
   show-actuator: false
