@@ -18,8 +18,8 @@ public class RabbitConsumer {
         String body = new String(msg.getBody());
         MessageDTO message = objectMapper.readValue(body, MessageDTO.class);
 
-        log.info(message.getId());
-        log.info(message.getMessage());
+        log.info("message.getId()={}", message.getId());
+        log.info("message.getMessage()={}", message.getMessage());
     }
 
 }
