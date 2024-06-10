@@ -30,6 +30,8 @@ subprojects {
 	dependencies {
 		implementation 'org.springframework.boot:spring-boot-starter-amqp'
 		implementation 'org.springframework.boot:spring-boot-starter-web'
+		implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
+
 		compileOnly 'org.projectlombok:lombok'
 		annotationProcessor 'org.projectlombok:lombok'
 
@@ -44,6 +46,29 @@ subprojects {
 		useJUnitPlatform()
 	}
 
+}
+
+project(':rabbitmq-consumer') {
+	bootJar { enabled = true }
+	jar { enabled = true }
+
+	dependencies {
+		implementation project(':rabbitmq-common')
+	}
+}
+
+project(':rabbitmq-producer') {
+	bootJar { enabled = true }
+	jar { enabled = true }
+
+	dependencies {
+		implementation project(':rabbitmq-common')
+	}
+}
+
+project(':rabbitmq-common') {
+	bootJar { enabled = false }
+	jar { enabled = true }
 }
 
 bootJar.enabled = false
