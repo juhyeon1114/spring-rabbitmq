@@ -3,4 +3,5 @@ services:
     image: rabbitmq:3.13.3-management
     container_name: RabbitMQ
     ports:
-      - 2181:2181
+      - 5672:5672
+      - 15672:15672
