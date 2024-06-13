@@ -12,14 +12,26 @@ import study.rabbitmq.dto.MessageDTO;
 @Component
 public class RabbitConsumer {
 
+    private final ObjectMapper objectMapper;
+
+    public RabbitConsumer() {
+        this.objectMapper = new ObjectMapper();
+    }
+
     @RabbitListener(queues = {"q.app.event"}, concurrency = "2")
     public void consumeMessage(Message msg) throws JsonProcessingException {
-            ObjectMapper objectMapper = new ObjectMapper();
             String body = new String(msg.getBody());
             MessageDTO dto = objectMapper.readValue(body, MessageDTO.class);
 
             log.info("dto.getId()={}", dto.getId());
             log.info("dto.getMessage()={}", dto.getMessage());
+    }
+
+    @RabbitListener(queues = {"q.test.2"})
+    public void consumeMessage2(Message msg) throws JsonProcessingException {
+        String body = new String(msg.getBody());
+
+        log.info(body);
     }
 
 }
